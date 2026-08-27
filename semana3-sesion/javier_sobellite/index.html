@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bootstrap Quest</title>
+  <!-- Bootstrap 5 CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- (Opcional) Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Estilos personalizados -->
+  <link href="estilo.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Pantalla de inicio con selección de personaje -->
+<div id="screen-start" class="container text-center py-5">
+  <h1>Bootstrap Quest</h1>
+  <p>Selecciona tu personaje para comenzar:</p>
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <button class="btn btn-primary btn-lg" onclick="startGame('Heroe')" aria-label="Seleccionar héroe">Héroe</button>
+    </div>
+    <div class="col-4">
+      <button class="btn btn-secondary btn-lg" onclick="startGame('Mage')" aria-label="Seleccionar maga">Maga</button>
+    </div>
+  </div>
+</div>
+
+<!-- Pantalla de juego -->
+<div id="screen-game" class="container-fluid d-none">
+  <!-- Barra de estado (vidas, puntos, inventario) -->
+  <div class="d-flex justify-content-between py-2">
+    <div>
+      Vidas: <span id="lives" class="badge bg-danger">3</span>
+      Puntos: <span id="score" class="badge bg-success">0</span>
+    </div>
+    <div>
+      <button class="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasInventory" aria-controls="offcanvasInventory">
+        Inventario <i class="bi bi-boxes"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mapa de nivel: grid de Bootstrap -->
+  <div class="row gx-1 gx-md-3 gy-3">
+    <div class="col-6 col-md-4">
+      <div class="p-3 border bg-light text-center">Bloque 1</div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="p-3 border bg-light text-center">Bloque 2</div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="p-3 border bg-light text-center">Bloque 3 (ancho completo en móvil)</div>
+    </div>
+    <!-- Más bloques según el diseño del nivel -->
+  </div>
+
+  <!-- Botón que lanza un modal (por ejemplo, ayuda o pausa) -->
+  <button class="btn btn-info mt-4" data-bs-toggle="modal" data-bs-target="#helpModal">
+    Ayuda <i class="bi bi-question-circle"></i>
+  </button>
+
+  <!-- Carrusel de imágenes/instrucciones -->
+  <div id="carouselQuest" class="carousel slide mt-4" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="img/slide1.png" class="d-block w-100" alt="Escena 1">
+      </div>
+      <div class="carousel-item">
+        <img src="img/slide2.png" class="d-block w-100" alt="Escena 2">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselQuest" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselQuest" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+
+  <!-- Botón para terminar el juego -->
+  <button class="btn btn-success mt-4" onclick="endGame()">
+    Finalizar Juego <i class="bi bi-flag"></i>
+  </button>
+</div>
+
+<!-- Pantalla final -->
+<div id="screen-end" class="container d-none text-center py-5">
+  <h2>¡Juego Terminado!</h2>
+  <p>Puntuación final: <span id="finalScore"></span></p>
+  <button class="btn btn-primary" onclick="location.reload()">Reiniciar</button>
+</div>
+
+<!-- Modal de ayuda/instrucciones -->
+<div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="helpModalLabel">Ayuda</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p>Usa los controles para completar la misión. ¡Buena suerte!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Offcanvas de inventario -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasInventory" aria-labelledby="offcanvasInventoryLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasInventoryLabel">Inventario</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar inventario"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="list-group">
+      <li class="list-group-item">Llave <span class="badge bg-secondary">x 1</span></li>
+      <li class="list-group-item">Monedas <span class="badge bg-secondary">x 5</span></li>
+      <!-- Más items -->
+    </ul>
+  </div>
+</div>
+
+<!-- Bibliotecas JS de Bootstrap (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Script personalizado -->
+<script src="script.js"></script>
+</body>
+</html>
