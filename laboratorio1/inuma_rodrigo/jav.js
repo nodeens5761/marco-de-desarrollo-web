@@ -1,10 +1,5 @@
 "use strict";
 
-
-/* ==========================================
-   BOTÓN MOSTRAR / OCULTAR CONSEJO
-   ========================================== */
-
 const botonConsejo =
     document.querySelector("#boton-consejo");
 
@@ -33,11 +28,6 @@ if (botonConsejo && consejo) {
     });
 
 }
-
-
-/* ==========================================
-   CAMBIO DE TEMA
-   ========================================== */
 
 const botonTema =
     document.querySelector("#boton-tema");
