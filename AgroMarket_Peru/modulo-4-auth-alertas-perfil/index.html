@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>AgroMarketPeru · Acceso</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/shared/styles.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <div id="commonNav"></div>
+    <main class="container py-5">
+        <div class="card border-0 soft-shadow auth-card mx-auto">
+            <div class="card-body p-4 p-md-5">
+                <div id="urlAlert"></div>
+                <div class="text-center mb-4"><span class="badge text-bg-success mb-2">Cuenta AgroMarketPeru</span>
+                    <h1 class="h3">Inicia sesión para desbloquear más funciones</h1>
+                    <p class="text-secondary">El catálogo es público; carrito, alertas, compras y perfil requieren una
+                        cuenta.</p>
+                </div>
+                <ul class="nav nav-tabs nav-fill" id="authTabs">
+                    <li class="nav-item"><button class="nav-link active" data-view="login" type="button">Login de
+                            Cliente</button></li>
+                    <li class="nav-item"><button class="nav-link" data-view="alert" type="button">Crear Alerta</button>
+                    </li>
+                    <li class="nav-item"><button class="nav-link" data-view="admin" type="button">Acceso de
+                            Administrador</button></li>
+                </ul>
+                <section id="viewLogin" class="pt-4">
+                    <form id="loginForm" novalidate>
+                        <div class="mb-3"><label class="form-label">Correo</label><input id="loginEmail" type="email"
+                                class="form-control" required>
+                            <div class="invalid-feedback">Ingresa un correo válido.</div>
+                        </div>
+                        <div class="mb-3"><label class="form-label">Contraseña</label><input id="loginPass"
+                                type="password" class="form-control" minlength="6" required>
+                            <div class="invalid-feedback">Mínimo 6 caracteres.</div>
+                        </div><button class="btn btn-success w-100" type="submit">Iniciar sesión</button>
+                    </form>
+                    <div class="border-top mt-4 pt-4"><button id="showRegister"
+                            class="btn btn-outline-success w-100">Crear cuenta de cliente</button></div>
+                </section>
+                <section id="viewRegister" class="d-none pt-4">
+                    <form id="registerForm" novalidate>
+                        <div class="mb-3"><label class="form-label">Nombre completo</label><input id="regNombre"
+                                class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label">Correo</label><input id="regCorreo" type="email"
+                                class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label">Contraseña</label><input id="regPass"
+                                type="password" class="form-control" minlength="6" required></div>
+                        <div class="mb-3"><label class="form-label">Confirmar contraseña</label><input id="regConfirm"
+                                type="password" class="form-control" minlength="6" required></div><button
+                            class="btn btn-success w-100">Registrar cliente</button>
+                    </form><button id="backLogin" class="btn btn-link w-100 mt-2">Volver al login</button>
+                </section>
+                <section id="viewAlert" class="d-none pt-4">
+                    <div class="alert alert-warning">La alerta solo puede crearse con sesión activa.</div>
+                    <form id="alertForm" novalidate>
+                        <div class="mb-3"><label class="form-label">Producto</label><select id="alertProducto"
+                                class="form-select" required></select></div>
+                        <div class="mb-3"><label class="form-label">Precio objetivo</label>
+                            <div class="input-group"><span class="input-group-text">S/</span><input id="alertPrecio"
+                                    type="number" min="0.01" step="0.01" class="form-control" required></div>
+                        </div><button class="btn btn-warning w-100">Guardar alerta</button>
+                    </form>
+                    <div id="alertList" class="mt-3"></div>
+                </section>
+                <section id="viewAdmin" class="d-none pt-4">
+                    <div class="alert alert-dark">El registro de administradores está bloqueado. Usa las credenciales
+                        entregadas por el proyecto.</div>
+                    <form id="adminForm" novalidate>
+                        <div class="mb-3"><label class="form-label">Usuario</label><input id="adminUser"
+                                class="form-control" required placeholder="ADMIN"></div>
+                        <div class="mb-3"><label class="form-label">Contraseña</label><input id="adminPass"
+                                type="password" class="form-control" required placeholder="admin123"></div><button
+                            class="btn btn-dark w-100">Entrar al panel</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </main>
+    <div id="commonFooter"></div>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toast" class="toast">
+            <div class="toast-header"><strong class="me-auto">AgroMarketPeru</strong><button class="btn-close"
+                    data-bs-dismiss="toast"></button></div>
+            <div id="toastMsg" class="toast-body"></div>
+        </div>
+    </div>
+    <script src="/shared/shared.js"></script>
+    <script src="/modulo-1-datos-backend/app.js"></script>
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
