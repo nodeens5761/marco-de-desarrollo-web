@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>AgroMarketPeru · Catálogo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/shared/styles.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <div id="commonNav"></div>
+    <main class="container py-4">
+        <div class="row g-4">
+            <aside class="col-lg-3">
+                <div class="card border-0 soft-shadow sticky-lg-top" style="top:84px">
+                    <div class="card-body"><span class="badge text-bg-success">Comparador</span>
+                        <h1 class="h4 mt-2">Busca por producto</h1>
+                        <div class="input-group mb-3"><span class="input-group-text"><i
+                                    class="bi bi-search"></i></span><input id="buscar" class="form-control"
+                                placeholder="arroz, leche..."></div><label class="form-label">Categoría</label><select
+                            id="categoria" class="form-select mb-3">
+                            <option value="">Todas</option>
+                            <option>Abarrotes</option>
+                            <option>Frutas y Verduras</option>
+                            <option>Lácteos</option>
+                        </select><label class="form-label">Tienda</label><select id="tienda" class="form-select mb-3">
+                            <option value="">Todas</option>
+                        </select><button id="limpiar" class="btn btn-outline-secondary w-100">Limpiar</button>
+                    </div>
+                </div>
+            </aside>
+            <section class="col-lg-9">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div><small class="text-secondary">Simulacion </small>
+                        <h2 class="h3 mb-0">Catálogo</h2>
+                    </div><span id="resultado" class="badge text-bg-light border"></span>
+                </div>
+                <div id="catalogo" class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4"></div>
+            </section>
+        </div>
+    </main>
+    <div id="commonFooter"></div>
+    <script src="/shared/shared.js"></script>
+    <script src="../modulo-1-datos-backend/app.js"></script>
+    <script src="../modulo-3-carrito-compras-historial/app.js"></script>
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
