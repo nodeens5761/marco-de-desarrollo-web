@@ -1,14 +1,29 @@
 // Integrante 3: carrito, checkout, historial y perfil del cliente.
+
+// ==========================================
+// 1. HELPERS Y UTILIDADES BASE
+// ==========================================
+
+// Función corta (selector) para no escribir document.querySelector en todo el código
 const Q = (selector) => document.querySelector(selector);
+
+// Obtiene los productos guardados en LocalStorage (si no hay nada, devuelve un arreglo vacío)
 const cart = () => JSON.parse(localStorage.getItem('ampCart') || '[]');
+
+// Guarda el carrito en LocalStorage y actualiza la vista de la página en tiempo real
 const saveCart = (carrito) => {
   localStorage.setItem('ampCart', JSON.stringify(carrito));
   updateCommon();
   renderCart();
 };
+
+// Obtiene la lista completa de productos desde el proveedor de datos global
 const products = () => window.AgroMarketDataProvider?.obtenerProductos?.() || [];
+
+// Verifica si existe una sesión activa guardada en el navegador
 const logged = () => !!localStorage.getItem('ampSession');
 
+// Control de seguridad: Si el usuario NO ha iniciado sesión, lo redirige a la pantalla de Login
 function ensure() {
   if (!logged()) {
     location.replace('/modulo-4-auth-alertas-perfil/index.html?auth=required');
@@ -17,16 +32,23 @@ function ensure() {
   return logged();
 }
 
+// ==========================================
+// 2. RENDERIZADO DEL CARRITO
+// ==========================================
+
+// Dibuja dinámicamente los productos del carrito en la interfaz y calcula los totales
 function renderCart() {
   const box = Q('#cartItems');
 
   if (!box) return;
   if (!logged()) return ensure();
 
+  // Une el ID del carrito con la información completa del producto (nombre, precio, foto)
   const rows = cart()
     .map((item) => ({ ...item, p: products().find((producto) => producto.id == item.id) }))
     .filter((item) => item.p);
 
+  // Si el carrito está vacío, muestra un mensaje informativo
   if (!rows.length) {
     box.innerHTML = `
       <div class="alert alert-info">
@@ -38,12 +60,14 @@ function renderCart() {
     return;
   }
 
+  // Muestra el resumen de compra, calcula la cantidad de unidades y el monto total en Soles
   Q('#summary').classList.remove('d-none');
   Q('#units').textContent = rows.reduce((suma, item) => suma + item.cantidad, 0);
 
   const total = rows.reduce((suma, item) => suma + item.p.precio * item.cantidad, 0);
   Q('#total').textContent = `S/ ${total.toFixed(2)}`;
 
+  // Genera el HTML para cada fila de producto con botones de suma, resta y eliminar
   box.innerHTML = rows
     .map(
       (item) => `
@@ -68,6 +92,11 @@ function renderCart() {
     .join('');
 }
 
+// ==========================================
+// 3. INTERACCIÓN Y GESTIÓN DEL CARRITO
+// ==========================================
+
+// Función global para añadir productos al carrito desde el catálogo
 function addToCart(id) {
   if (!ensure()) return;
 
@@ -75,9 +104,9 @@ function addToCart(id) {
   const item = carrito.find((producto) => producto.id == id);
 
   if (item) {
-    item.cantidad++;
+    item.cantidad++; // Si existe, incrementa la cantidad
   } else {
-    carrito.push({ id: +id, cantidad: 1 });
+    carrito.push({ id: +id, cantidad: 1 }); // Si es nuevo, lo agrega
   }
 
   saveCart(carrito);
@@ -85,6 +114,7 @@ function addToCart(id) {
 
 window.addToCart = addToCart;
 
+// Escuchador de eventos en los botones del carrito (+, -, o eliminar)
 Q('#cartItems')?.addEventListener('click', (event) => {
   const boton = event.target.closest('button');
 
@@ -96,13 +126,19 @@ Q('#cartItems')?.addEventListener('click', (event) => {
 
   if (!item) return;
 
-  if (boton.dataset.p) item.cantidad++;
-  if (boton.dataset.m) item.cantidad--;
-  if (boton.dataset.x) item.cantidad = 0;
+  if (boton.dataset.p) item.cantidad++; // Botón sumar (+)
+  if (boton.dataset.m) item.cantidad--; // Botón restar (-)
+  if (boton.dataset.x) item.cantidad = 0; // Botón eliminar
 
+  // Guarda únicamente los productos cuya cantidad sea mayor a 0
   saveCart(carrito.filter((producto) => producto.cantidad > 0));
 });
 
+// ==========================================
+// 4. PROCESO DE CHECKOUT Y PROCESAMIENTO DE COMPRA
+// ==========================================
+
+// Al pulsar "Continuar compra", obtiene los datos del usuario desde la API para autocompletar el modal
 Q('#checkout')?.addEventListener('click', async () => {
   if (!ensure() || !cart().length) return;
 
@@ -121,6 +157,7 @@ Q('#checkout')?.addEventListener('click', async () => {
   }
 });
 
+// Procesa el formulario de envío: crea el pedido via POST en el backend y limpia el carrito
 Q('#checkoutForm')?.addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -144,6 +181,7 @@ Q('#checkoutForm')?.addEventListener('submit', async (event) => {
   const total = items.reduce((suma, item) => suma + item.precio * item.cantidad, 0);
 
   try {
+    // Envío del pedido a la API backend[cite: 2]
     const respuesta = await api('/pedidos', {
       method: 'POST',
       body: JSON.stringify({
@@ -162,6 +200,7 @@ Q('#checkoutForm')?.addEventListener('submit', async (event) => {
       })
     });
 
+    // Limpia el carrito local y muestra pantalla de éxito
     localStorage.removeItem('ampCart');
     bootstrap.Modal.getInstance(Q('#checkoutModal')).hide();
 
@@ -180,6 +219,11 @@ Q('#checkoutForm')?.addEventListener('submit', async (event) => {
   }
 });
 
+// ==========================================
+// 5. HISTORIAL DE COMPRAS
+// ==========================================
+
+// Consulta la API (/pedidos) y renderiza las tarjetas con el historial de pedidos del cliente
 async function history() {
   if (!Q('#orders') || !ensure()) return;
 
@@ -229,6 +273,11 @@ async function history() {
   }
 }
 
+// ==========================================
+// 6. GESTIÓN DEL PERFIL DE USUARIO
+// ==========================================
+
+// Obtiene los datos del perfil desde el backend y llena los campos del formulario
 async function perfil() {
   if (!Q('#profileForm') || !ensure()) return;
 
@@ -251,6 +300,7 @@ async function perfil() {
   }
 }
 
+// Guarda las modificaciones del perfil mediante una petición PUT a la API
 Q('#profileForm')?.addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -284,6 +334,11 @@ Q('#profileForm')?.addEventListener('submit', async (event) => {
   }
 });
 
+// ==========================================
+// 7. VISTA MI CUENTA / HUB
+// ==========================================
+
+// Carga el nombre y correo del usuario en el panel principal
 async function cargarCuenta() {
   const nombre = Q('#nombrePerfil');
   const correo = Q('#correoPerfil');
@@ -301,6 +356,7 @@ async function cargarCuenta() {
   }
 }
 
+// Carga un resumen de las últimas 3 compras en el panel principal
 async function cargarResumenCompras() {
   const box = Q('#resumenCompras');
 
@@ -349,8 +405,14 @@ async function cargarResumenCompras() {
   }
 }
 
+// ==========================================
+// 8. EVENTOS DE CIERRE DE SESIÓN E INICIALIZACIÓN
+// ==========================================
+
+// Asigna la función de cerrar sesión al botón correspondiente
 Q('#logout')?.addEventListener('click', logout);
 
+// Ejecución automática al cargar la página
 renderCart();
 history();
 perfil();
