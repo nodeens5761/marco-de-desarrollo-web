@@ -1,4 +1,7 @@
+
+//  se crea un proveedor local de productos
 window.AgroMarketDataProvider = (() => {
+  // Array base con productos  del negocio.
   const p = [
     {
       id: 1,
@@ -74,12 +77,14 @@ window.AgroMarketDataProvider = (() => {
     }
   ];
 
+  // obtener lista y agregar nuevos productos.
   return {
     obtenerProductos: () => p.slice(),
     agregarProducto: (x) => p.push({ ...x, id: Date.now() })
   };
 })();
 
+// Verificampos si el usuario  tiene permisos de admi
 const protectedAdmin = () => {
   try {
     return JSON.parse(localStorage.getItem('ampUser') || 'null')?.rol === 'admin';
@@ -88,10 +93,12 @@ const protectedAdmin = () => {
   }
 };
 
+// Si no es admi, redirige a  autenticación.
 if (document.body.dataset.admin === 'true' && !protectedAdmin()) {
   location.replace('/modulo-4-auth-alertas-perfil/index.html?auth=admin');
 }
 
+// Renderiza la tabla de productos del panel administrador.
 function render() {
   const tabla = document.querySelector('#tabla');
 
@@ -120,6 +127,7 @@ function render() {
     .join('');
 }
 
+// Captura el formulario para registrar nuevos productos en memoria.
 document.querySelector('#formProducto')?.addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -144,6 +152,7 @@ document.querySelector('#formProducto')?.addEventListener('submit', (e) => {
   render();
 });
 
+// Consulta los pedidos recientes 
 async function pedidos() {
   const contenedor = document.querySelector('#orders');
 

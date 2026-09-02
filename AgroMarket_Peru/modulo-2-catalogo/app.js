@@ -1,20 +1,25 @@
-// Integrante 2: búsqueda, filtros y tarjetas del catálogo.
+// Módulo 2: catálogo, filtros y acciones de compra/alerta del cliente.
+// Se reutiliza la fuente de datos del módulo 1 para mostrar productos comparables.
 const $ = (selector) => document.querySelector(selector);
 const catalogo = $('#catalogo');
 const buscar = $('#buscar');
 const tienda = $('#tienda');
 const categoria = $('#categoria');
 
+// Comprueba si existe una sesión activa del usuario para permitir acciones.
 function hasSession() {
   return !!localStorage.getItem('ampSession');
 }
 
+// Redirige al usuario al módulo de autenticación si intenta ejecutar una acción protegida.
 function goAuth(action, id) {
   location.href = `/modulo-4-auth-alertas-perfil/index.html?auth=required&action=${action}&id=${id}`;
 }
 
+// Obtiene la lista actual de productos desde el proveedor compartido.
 const productos = () => AgroMarketDataProvider.obtenerProductos();
 
+// Carga las tiendas disponibles para filtrar el catálogo.
 function tiendas() {
   [...new Set(productos().map((producto) => producto.tienda))]
     .sort()
@@ -23,6 +28,7 @@ function tiendas() {
     });
 }
 
+// Genera las tarjetas del catálogo según los filtros actuales.
 function render() {
   const textoBusqueda = buscar.value.toLowerCase();
   const categoriaSeleccionada = categoria.value;
@@ -71,6 +77,7 @@ function render() {
     : '<div class="col-12"><div class="alert alert-warning">No encontramos coincidencias.</div></div>';
 }
 
+// Maneja los eventos de los botones de cada tarjeta: carrito y alerta.
 catalogo.addEventListener('click', (e) => {
   const boton = e.target.closest('[data-action]');
 
@@ -93,10 +100,12 @@ catalogo.addEventListener('click', (e) => {
   }
 });
 
+// Actualiza el catálogo cada vez que cambian los filtros.
 [buscar, categoria, tienda].forEach((elemento) => {
   elemento.addEventListener('input', render);
 });
 
+// Botón para limpiar los filtros y volver al estado inicial.
 $('#limpiar').addEventListener('click', () => {
   buscar.value = '';
   categoria.value = '';
@@ -104,6 +113,7 @@ $('#limpiar').addEventListener('click', () => {
   render();
 });
 
+// Carga parámetros de búsqueda desde la URL y renderiza el catálogo inicial.
 const url = new URLSearchParams(location.search);
 buscar.value = url.get('q') || '';
 categoria.value = url.get('categoria') || '';
