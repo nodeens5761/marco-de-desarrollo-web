@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catálogo de cursos TechLab</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <a href="/./src/main/resources/static/index.html">Inicio TechLab</a>
+    </header>
+    <main>
+        <h1>Catálogo de cursos</h1>
+        <p>Los datos de este catálogo provienen del servidor Java.</p>
+        <form id="busqueda" role="search">
+            <label for="consulta">Buscar por título</label>
+            <input id="consulta" name="q" type="search" maxlength="60" aria-describedby="ayuda">
+            <p id="ayuda" class="form-text">Hasta 60 caracteres.</p>
+            <button id="buscar" type="submit">Buscar</button>
+        </form>
+        <p id="estado" role="status" aria-live="polite"></p>
+        <ul id="cursos" aria-label="Cursos disponibles"></ul>
+        <noscript>Active JavaScript para consultar el catálogo.</noscript>
+    </main>
+</body>
+
+</html>
