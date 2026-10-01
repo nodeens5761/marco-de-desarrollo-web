@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TechLab ofrece rutas formativas de desarrollo web con horarios y registro de interés.">
+  <title>TechLab | Rutas formativas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark" aria-label="Navegación principal">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#inicio">TechLab</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Mostrar u ocultar navegación">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menuPrincipal">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" aria-current="page" href="#inicio">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#rutas">Rutas</a></li>
+            <li class="nav-item"><a class="nav-link" href="#horarios">Horarios</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero d-flex align-items-center">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-12 col-lg-7">
+            <span class="badge text-bg-primary mb-3">Aprende tecnología</span>
+            <h1 class="display-4 fw-bold">Construye tu ruta profesional en desarrollo web</h1>
+            <p class="lead">Elige una ruta formativa, compara horarios y registra tu interés en una experiencia web adaptada a cualquier dispositivo.</p>
+            <a class="btn btn-primary btn-lg" href="#rutas">Ver rutas</a>
+          </div>
+          <div class="col-12 col-lg-5 text-center">
+            <img src="assets/img/hero.svg" class="img-fluid hero-img" alt="Estudiante trabajando en desarrollo web" width="640" height="360">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rutas" class="py-5">
+      <div class="container">
+        <div class="mb-4">
+          <h2 class="fw-bold">Rutas formativas</h2>
+          <p class="mb-0">Tres opciones para fortalecer tus competencias digitales.</p>
+        </div>
+        <div class="row g-4">
+          <article class="col-12 col-md-6 col-xl-4">
+            <div class="card h-100 shadow-sm">
+              <img src="assets/img/frontend.svg" class="card-img-top" alt="Estudiante diseñando una interfaz web" width="640" height="360" loading="lazy">
+              <div class="card-body d-flex flex-column">
+                <span class="badge text-bg-primary align-self-start mb-2">Inicial</span>
+                <h3 class="card-title h5">Frontend con Bootstrap</h3>
+                <p class="card-text">Aprende HTML, CSS, JavaScript y Bootstrap para crear interfaces responsivas.</p>
+                <p class="mb-3"><strong>Duración:</strong> 8 semanas</p>
+                <button class="btn btn-outline-primary mt-auto" type="button" data-bs-toggle="modal" data-bs-target="#modalRegistro" data-curso="Frontend con Bootstrap">Solicitar información</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="col-12 col-md-6 col-xl-4">
+            <div class="card h-100 shadow-sm">
+              <img src="assets/img/backend.svg" class="card-img-top" alt="Estudiante desarrollando servicios backend" width="640" height="360" loading="lazy">
+              <div class="card-body d-flex flex-column">
+                <span class="badge text-bg-success align-self-start mb-2">Intermedio</span>
+                <h3 class="card-title h5">Backend con Java</h3>
+                <p class="card-text">Desarrolla aplicaciones web con Java, APIs y fundamentos de persistencia.</p>
+                <p class="mb-3"><strong>Duración:</strong> 10 semanas</p>
+                <button class="btn btn-outline-primary mt-auto" type="button" data-bs-toggle="modal" data-bs-target="#modalRegistro" data-curso="Backend con Java">Solicitar información</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="col-12 col-md-6 col-xl-4">
+            <div class="card h-100 shadow-sm">
+              <img src="assets/img/fullstack.svg" class="card-img-top" alt="Equipo desarrollando una aplicación full stack" width="640" height="360" loading="lazy">
+              <div class="card-body d-flex flex-column">
+                <span class="badge text-bg-dark align-self-start mb-2">Avanzado</span>
+                <h3 class="card-title h5">Desarrollo Full Stack</h3>
+                <p class="card-text">Integra frontend, backend y bases de datos para construir aplicaciones completas.</p>
+                <p class="mb-3"><strong>Duración:</strong> 12 semanas</p>
+                <button class="btn btn-outline-primary mt-auto" type="button" data-bs-toggle="modal" data-bs-target="#modalRegistro" data-curso="Desarrollo Full Stack">Solicitar información</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="horarios" class="py-5 bg-body-secondary">
+      <div class="container">
+        <h2 class="fw-bold mb-4">Horarios disponibles</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover align-middle">
+            <caption>Horarios disponibles para el ciclo actual</caption>
+            <thead>
+              <tr><th scope="col">Ruta</th><th scope="col">Día</th><th scope="col">Horario</th><th scope="col">Modalidad</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Frontend con Bootstrap</th><td>Lunes</td><td>19:00 - 21:00</td><td>Híbrida</td></tr>
+              <tr><th scope="row">Backend con Java</th><td>Martes</td><td>19:00 - 21:00</td><td>Virtual</td></tr>
+              <tr><th scope="row">Desarrollo Full Stack</th><td>Miércoles</td><td>19:00 - 22:00</td><td>Presencial</td></tr>
+              <tr><th scope="row">Frontend con Bootstrap</th><td>Sábado</td><td>09:00 - 12:00</td><td>Virtual</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="py-5">
+      <div class="container">
+        <div class="alert alert-info mb-0" role="alert">
+          <strong>Registro demostrativo:</strong> puedes registrar tu interés en una ruta, pero los datos no se envían a un servidor ni se almacenan.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white py-4">
+    <div class="container text-center">TechLab &copy; <span id="anio"></span></div>
+  </footer>
+
+  <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="tituloModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="tituloModal">Registrar interés</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <form id="formRegistro" novalidate>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label" for="curso">Ruta</label>
+              <input class="form-control" id="curso" name="curso" type="text" readonly>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="nombre">Nombre</label>
+              <input class="form-control" id="nombre" name="nombre" type="text" minlength="3" autocomplete="name" required>
+              <div class="invalid-feedback">Ingresa un nombre de al menos tres caracteres.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="correo">Correo electrónico</label>
+              <input class="form-control" id="correo" name="correo" type="email" autocomplete="email" required>
+              <div class="invalid-feedback">Ingresa un correo válido.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="modalidad">Modalidad</label>
+              <select class="form-select" id="modalidad" name="modalidad" required>
+                <option value="">Selecciona una modalidad</option>
+                <option>Presencial</option>
+                <option>Virtual</option>
+                <option>Híbrida</option>
+              </select>
+              <div class="invalid-feedback">Selecciona una modalidad.</div>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" id="acepta" name="acepta" type="checkbox" required>
+              <label class="form-check-label" for="acepta">Acepto el uso demostrativo de estos datos.</label>
+              <div class="invalid-feedback">Debes aceptar para continuar.</div>
+            </div>
+            <p id="estadoFormulario" class="alert alert-success d-none mt-3" role="status" aria-live="polite"></p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">Registrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYjWJrVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
