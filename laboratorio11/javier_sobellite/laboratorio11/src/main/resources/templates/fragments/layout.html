@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(titulo)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${titulo}">TechLab</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link th:href="@{/css/site.css}" rel="stylesheet">
+  <script th:src="@{/js/site.js}" defer></script>
+</head>
+<body>
+<header th:fragment="cabecera">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" th:href="@{/cursos}">TechLab Web</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navTechLab" aria-controls="navTechLab" aria-expanded="false" aria-label="Abrir navegación">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navTechLab">
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link" th:href="@{/cursos}">Cursos</a>
+          <a class="nav-link" th:href="@{/cursos/nuevo}">Nuevo curso</a>
+          <a class="nav-link" th:href="@{/cursos/resumen}">Resumen</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<footer th:fragment="pie" class="mt-auto py-4 border-top">
+  <div class="container text-body-secondary small">TechLab Web · Marcos de Desarrollo Web · Semana 11</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" defer></script>
+</footer>
+</body>
+</html>
