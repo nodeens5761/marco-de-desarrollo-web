@@ -1,0 +1,48 @@
+body {
+  background: #f7f9fc;
+  color: #172337;
+}
+
+main {
+  flex: 1;
+}
+
+.form-panel,
+.detail-panel,
+.summary-card {
+  max-width: 760px;
+  padding: 2rem;
+  border: 1px solid #e1e7ef;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 0.5rem 1.5rem rgba(24, 39, 75, 0.06);
+}
+
+.summary-card {
+  max-width: none;
+}
+
+.course-card {
+  border: 1px solid #e1e7ef;
+  border-radius: 0.9rem;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #0b5ed7;
+  outline-offset: 3px;
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+  border-width: 2px;
+}
+
+@media (max-width: 576px) {
+  .form-panel,
+  .detail-panel {
+    padding: 1.25rem;
+  }
+}
