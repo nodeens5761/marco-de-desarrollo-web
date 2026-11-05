@@ -1,0 +1,27 @@
+@baseUrl = http://localhost:8080
+
+### Listar cursos
+GET {{baseUrl}}/api/v1/cursos
+
+### Consultar curso
+GET {{baseUrl}}/api/v1/cursos/1
+
+### Crear curso
+POST {{baseUrl}}/api/v1/cursos
+Content-Type: application/json
+
+{
+  "titulo": "Seguridad web",
+  "horas": 24,
+  "categoriaId": 2
+}
+
+### Validación 400
+POST {{baseUrl}}/api/v1/cursos
+Content-Type: application/json
+
+{
+  "titulo": "",
+  "horas": 0,
+  "categoriaId": 999999
+}

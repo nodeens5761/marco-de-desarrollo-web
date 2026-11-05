@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header class="site-header" th:fragment="header">
+    <a class="brand" th:href="@{/cursos}">TechLab</a>
+    <nav aria-label="Navegación principal">
+        <a th:href="@{/cursos}">Cursos</a>
+        <a th:href="@{/cursos/resumen}">Resumen</a>
+        <a th:if="${security.authenticated}" th:href="@{/perfil}">Mi sesión</a>
+    </nav>
+    <div class="account-actions">
+        <a class="button secondary" th:if="${!security.authenticated}" th:href="@{/login}">Iniciar sesión</a>
+        <div class="account-session" th:if="${security.authenticated}">
+            <span class="session-name" th:text="${security.username}">docente</span>
+            <form method="post" th:action="@{/logout}">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button class="button secondary" type="submit">Cerrar sesión</button>
+            </form>
+        </div>
+    </div>
+</header>
+</body>
+</html>

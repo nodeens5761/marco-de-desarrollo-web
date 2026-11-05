@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${cursoId == null} ? 'Nuevo curso | TechLab' : 'Editar curso | TechLab'">Curso | TechLab</title>
+    <link rel="stylesheet" th:href="@{/css/site.css}">
+</head>
+<body>
+<div class="container narrow">
+    <div th:replace="~{fragments/layout :: header}"></div>
+    <main>
+        <p class="eyebrow">GESTIÓN DE CURSOS</p>
+        <h1 th:text="${cursoId == null} ? 'Nuevo curso' : 'Editar curso'">Curso</h1>
+        <p class="muted">Completa los datos. Los campos marcados son obligatorios.</p>
+        <section class="panel form-panel">
+            <div class="notice error" role="alert" th:if="${#fields.hasGlobalErrors()}">
+                <p th:each="error : ${#fields.globalErrors()}" th:text="${error}"></p>
+            </div>
+            <form th:object="${curso}"
+                  th:action="${cursoId == null} ? @{/cursos} : @{/cursos/{id}(id=${cursoId})}"
+                  method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <div class="field">
+                    <label for="titulo">Título</label>
+                    <input id="titulo" type="text" th:field="*{titulo}" maxlength="120" required
+                           th:aria-invalid="${#fields.hasErrors('titulo')}"
+                           th:aria-describedby="${#fields.hasErrors('titulo')} ? 'titulo-error' : null">
+                    <p class="field-error" id="titulo-error" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></p>
+                </div>
+                <div class="field">
+                    <label for="horas">Horas</label>
+                    <input id="horas" type="number" th:field="*{horas}" min="1" max="500" required
+                           th:aria-invalid="${#fields.hasErrors('horas')}"
+                           th:aria-describedby="${#fields.hasErrors('horas')} ? 'horas-error' : null">
+                    <p class="field-error" id="horas-error" th:if="${#fields.hasErrors('horas')}" th:errors="*{horas}"></p>
+                </div>
+                <div class="field">
+                    <label for="categoriaId">Categoría</label>
+                    <select id="categoriaId" th:field="*{categoriaId}" required
+                            th:aria-invalid="${#fields.hasErrors('categoriaId')}"
+                            th:aria-describedby="${#fields.hasErrors('categoriaId')} ? 'categoria-error' : null">
+                        <option value="">Seleccione una categoría</option>
+                        <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
+                    </select>
+                    <p class="field-error" id="categoria-error" th:if="${#fields.hasErrors('categoriaId')}" th:errors="*{categoriaId}"></p>
+                </div>
+                <div class="form-actions">
+                    <a class="button secondary" th:href="${cursoId == null} ? @{/cursos} : @{/cursos/{id}(id=${cursoId})}">Cancelar</a>
+                    <button class="button primary" type="submit">Guardar curso</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <footer>TechLab · Laboratorio de Desarrollo Web</footer>
+</div>
+</body>
+</html>

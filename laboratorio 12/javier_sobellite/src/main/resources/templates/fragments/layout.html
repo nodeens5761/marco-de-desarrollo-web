@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header class="site-header" th:fragment="header">
+    <a class="brand" th:href="@{/cursos}">TechLab</a>
+    <nav aria-label="Navegación principal">
+        <a th:href="@{/cursos}">Cursos</a>
+        <a th:href="@{/cursos/resumen}">Resumen</a>
+        <a th:href="@{/api/v1/cursos}" target="_blank" rel="noopener">API REST</a>
+    </nav>
+</header>
+</body>
+</html>

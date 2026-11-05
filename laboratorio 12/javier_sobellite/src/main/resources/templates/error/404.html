@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>No encontrado | TechLab</title>
+    <link rel="stylesheet" th:href="@{/css/site.css}">
+</head>
+<body>
+<div class="container narrow">
+    <div th:replace="~{fragments/layout :: header}"></div>
+    <main class="panel empty-state">
+        <p class="eyebrow">ERROR 404</p>
+        <h1>Curso no encontrado</h1>
+        <p class="muted">El curso solicitado no existe o ya fue eliminado.</p>
+        <a class="button primary" th:href="@{/cursos}">Volver al catálogo</a>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:8080
+@basicCredential = REEMPLAZA_POR_BASE64_DE_USUARIO_Y_CLAVE
+
+### Listar cursos
+GET {{baseUrl}}/api/v1/cursos
+Authorization: Basic {{basicCredential}}
+
+### Consultar curso
+GET {{baseUrl}}/api/v1/cursos/1
+Authorization: Basic {{basicCredential}}
+
+### Crear curso
+POST {{baseUrl}}/api/v1/cursos
+Authorization: Basic {{basicCredential}}
+Content-Type: application/json
+
+{
+  "titulo": "Seguridad web",
+  "horas": 24,
+  "categoriaId": 2
+}
+
+### Validación 400
+POST {{baseUrl}}/api/v1/cursos
+Authorization: Basic {{basicCredential}}
+Content-Type: application/json
+
+{
+  "titulo": "",
+  "horas": 0,
+  "categoriaId": 999999
+}

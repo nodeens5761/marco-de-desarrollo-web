@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detalle del curso | TechLab</title>
+    <link rel="stylesheet" th:href="@{/css/site.css}">
+    <script th:src="@{/js/site.js}" defer></script>
+</head>
+<body>
+<div class="container narrow">
+    <div th:replace="~{fragments/layout :: header}"></div>
+    <main>
+        <div class="page-heading">
+            <div>
+                <p class="eyebrow">DETALLE</p>
+                <h1 th:text="${curso.titulo}">Curso</h1>
+            </div>
+            <a class="button secondary" th:href="@{/cursos}">Volver</a>
+        </div>
+        <div class="notice success" role="status" th:if="${mensaje}" th:text="${mensaje}"></div>
+        <section class="panel details">
+            <div><span class="detail-label">Título</span><strong th:text="${curso.titulo}"></strong></div>
+            <div><span class="detail-label">Duración</span><strong><span th:text="${curso.horas}"></span> horas</strong></div>
+            <div><span class="detail-label">Categoría</span><strong th:text="${curso.categoriaNombre}"></strong></div>
+        </section>
+        <div class="form-actions">
+            <a class="button primary" th:href="@{/cursos/{id}/editar(id=${curso.id})}">Editar</a>
+            <form th:action="@{/cursos/{id}/eliminar(id=${curso.id})}" method="post" data-confirm="¿Deseas eliminar este curso?">
+                <button class="button danger" type="submit">Eliminar</button>
+            </form>
+        </div>
+    </main>
+    <footer>TechLab · Laboratorio de Desarrollo Web</footer>
+</div>
+</body>
+</html>

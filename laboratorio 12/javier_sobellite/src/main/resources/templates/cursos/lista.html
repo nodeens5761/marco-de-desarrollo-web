@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cursos | TechLab</title>
+    <link rel="stylesheet" th:href="@{/css/site.css}">
+    <script th:src="@{/js/site.js}" defer></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{fragments/layout :: header}"></div>
+    <main>
+        <div class="page-heading">
+            <div>
+                <p class="eyebrow">CATÁLOGO ACADÉMICO</p>
+                <h1>Cursos</h1>
+                <p class="muted">Administra los cursos y sus categorías.</p>
+            </div>
+            <a class="button primary" th:href="@{/cursos/nuevo}">Nuevo curso</a>
+        </div>
+        <div class="notice success" role="status" th:if="${mensaje}" th:text="${mensaje}"></div>
+        <div class="panel table-panel" th:if="${!#lists.isEmpty(cursos)}">
+            <table>
+                <caption>Listado de cursos registrados</caption>
+                <thead>
+                <tr>
+                    <th scope="col">Título</th>
+                    <th scope="col">Horas</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="curso : ${cursos}">
+                    <td data-label="Título" th:text="${curso.titulo}"></td>
+                    <td data-label="Horas" th:text="${curso.horas}"></td>
+                    <td data-label="Categoría" th:text="${curso.categoriaNombre}"></td>
+                    <td data-label="Acciones">
+                        <div class="actions">
+                            <a class="text-link" th:href="@{/cursos/{id}(id=${curso.id})}">Ver</a>
+                            <a class="text-link" th:href="@{/cursos/{id}/editar(id=${curso.id})}">Editar</a>
+                            <form th:action="@{/cursos/{id}/eliminar(id=${curso.id})}" method="post" data-confirm="¿Deseas eliminar este curso?">
+                                <button class="link-button danger-text" type="submit">Eliminar</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <section class="panel empty-state" th:if="${#lists.isEmpty(cursos)}">
+            <h2>Aún no hay cursos</h2>
+            <p class="muted">Registra el primer curso para comenzar.</p>
+            <a class="button primary" th:href="@{/cursos/nuevo}">Registrar curso</a>
+        </section>
+    </main>
+    <footer>TechLab · Laboratorio de Desarrollo Web</footer>
+</div>
+</body>
+</html>

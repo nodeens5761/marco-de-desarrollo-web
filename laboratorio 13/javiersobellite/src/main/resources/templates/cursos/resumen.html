@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Resumen | TechLab</title>
+    <link rel="stylesheet" th:href="@{/css/site.css}">
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{fragments/layout :: header}"></div>
+    <main>
+        <p class="eyebrow">INDICADORES</p>
+        <h1>Resumen de cursos</h1>
+        <section class="stat-card" aria-label="Total de cursos">
+            <span class="detail-label">Total de cursos registrados</span>
+            <strong th:text="${resumen.totalCursos}">0</strong>
+        </section>
+        <section class="panel table-panel">
+            <h2>Cursos por categoría</h2>
+            <table th:if="${!#lists.isEmpty(resumen.categorias)}">
+                <caption>Cantidad de cursos agrupados por categoría</caption>
+                <thead><tr><th scope="col">Categoría</th><th scope="col">Cantidad de cursos</th></tr></thead>
+                <tbody>
+                <tr th:each="fila : ${resumen.categorias}">
+                    <td th:text="${fila.categoriaNombre}"></td>
+                    <td th:text="${fila.cantidad}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="empty-note" th:if="${#lists.isEmpty(resumen.categorias)}">No hay cursos para resumir.</p>
+        </section>
+    </main>
+    <footer>TechLab · Laboratorio de Desarrollo Web</footer>
+</div>
+</body>
+</html>
